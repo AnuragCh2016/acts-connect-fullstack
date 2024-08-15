@@ -32,7 +32,7 @@ const Sidebar = () => {
     <div className="card text-white h-screen flex flex-col justify-between py-5 bg-[rgb(3,11,40)]">
       <div className="space-y-8 pl-5">
         <div className="">
-          <span className="logo">ActsConnects</span>
+          <span className="logo">ActsConnect</span>
         </div>
         <div className="space-y-8">
           {navigationMenu.map((item) => (

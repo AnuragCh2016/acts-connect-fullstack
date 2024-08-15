@@ -5,32 +5,32 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 const teamMembers = [
   {
     name: "Anurag",
-    role: "Developer",
+    role: "Founder",
     image: "path_to_image_1",
   },
   {
     name: "Kaustab",
-    role: "Developer",
+    role: "Founder",
     image: "path_to_image_2",
   },
   {
     name: "Aditya",
-    role: "Developer",
+    role: "Founder",
     image: "path_to_image_3",
   },
   {
     name: "Shreyash",
-    role: "Designer",
+    role: "Founder",
     image: "path_to_image_4",
   },
   {
     name: "lokesh",
-    role: "Developer",
+    role: "Founder",
     image: "path_to_image_5",
   },
   {
     name: "Abhishek",
-    role: "Developer",
+    role: "Founder",
     image: "path_to_image_6",
   },
 ];

@@ -2,7 +2,6 @@ import * as React from "react";
 import { useFormik } from "formik";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Avatar, Backdrop, CircularProgress, IconButton } from "@mui/material";
 import ImageIcon from "@mui/icons-material/Image";
@@ -28,12 +27,9 @@ const style = {
 export default function CreatePostModal({ handleClose, open }) {
   const [selectedImage, setSelectedImage] = React.useState();
   const [selectedVideo, setSelectedVideo] = React.useState();
-  const [isLoading, setIsloading] = React.useState();
+  const [isLoading, setIsloading] = React.useState(false);
   const dispatch = useDispatch();
-
-  const store = useSelector((store) => store);
-
-  console.log("store -------- ", store);
+  const { auth } = useSelector((store) => store);
 
   const formik = useFormik({
     initialValues: {
@@ -46,6 +42,12 @@ export default function CreatePostModal({ handleClose, open }) {
       dispatch(createPost(values));
       console.log("Form values:", values);
       handleClose();
+
+      // Reset the form fields after submission
+      formik.resetForm();
+      setSelectedImage(null);
+      setSelectedVideo(null);
+      setIsloading(false);
     },
   });
 
@@ -76,10 +78,14 @@ export default function CreatePostModal({ handleClose, open }) {
         <form onSubmit={formik.handleSubmit}>
           <div className="">
             <div className="flex space-x-4 items-center">
-              <Avatar />
+              <Avatar alt={auth.user?.firstName} src={auth.user?.profilePicture} />
               <div>
-                <p className="font-bold text-lg">Code with zosh</p>
-                <p className="text-sm">@codewithzosh</p>
+                <p className="font-bold text-lg">
+                  {auth.user?.firstName + " " + auth.user?.lastName}
+                </p>
+                <p className="text-sm">
+                  @{auth.user?.firstName?.toLowerCase() + "_" + auth.user?.lastName?.toLowerCase()}
+                </p>
               </div>
             </div>
             <textarea
