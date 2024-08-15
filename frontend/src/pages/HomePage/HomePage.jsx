@@ -4,12 +4,10 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import MiddlePart from "./MiddlePart";
 import HomeRight from "../../components/HomeRight/HomeRight";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Reels from "../Reels/Reels";
 import Profile from "../Profile/Profile";
 import CreatePostModal from "../../components/CreatePost/CreatePostModal";
 import { useSelector } from "react-redux";
 import Authentication from "../Authentication/Authentication";
-import CreateReelsForm from "../Reels/CreateReelsForm";
 
 const HomePage = () => {
   const location = useLocation();
@@ -32,8 +30,6 @@ const HomePage = () => {
         >
           <Routes>
             <Route path="/" element={<MiddlePart />} />
-            <Route path="/reels" element={<Reels />} />
-            <Route path="/create-reels" element={<CreateReelsForm />} />
             <Route path="/profile/:id" element={<Profile />} />
           </Routes>
         </Grid>

@@ -18,13 +18,13 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../Redux/Auth/auth.action";
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("First Name is required"),
-  lastName: Yup.string().required("Last Name is required"),
+  fullName: Yup.string().required("Full Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(6, "Password must be at least 6 characters")
     .required("Password is required"),
-  semister: Yup.string().required("Semister is required"),
+  batchSemester: Yup.string().required("Batch Semester is required"),
+  course: Yup.string().required("Course is required"),
 });
 
 function RegistrationForm() {
@@ -32,15 +32,12 @@ function RegistrationForm() {
   const dispatch = useDispatch();
 
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    fullName: "",
     email: "",
     password: "",
     batchYear: "",
-    semister: "",
+    batchSemester: "",
     course: "",
-    prn: "",
-    gender: "male",
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
@@ -58,38 +55,21 @@ function RegistrationForm() {
       >
         {({ setFieldValue }) => (
           <Form className="space-y-5">
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+            <div className="space-y-5">
+              <div>
                 <Field
                   as={TextField}
-                  name="firstName"
-                  placeholder="First Name"
+                  name="fullName"
+                  placeholder="Full Name"
                   variant="outlined"
                   fullWidth
                 />
                 <ErrorMessage
-                  name="firstName"
+                  name="fullName"
                   component="div"
                   className="text-red-500"
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Field
-                  as={TextField}
-                  name="lastName"
-                  placeholder="Last Name"
-                  variant="outlined"
-                  fullWidth
-                />
-                <ErrorMessage
-                  name="lastName"
-                  component="div"
-                  className="text-red-500"
-                />
-              </Grid>
-            </Grid>
-
-            <div className="space-y-5 mt-5">
+              </div>
               <div>
                 <Field
                   as={TextField}
@@ -121,7 +101,7 @@ function RegistrationForm() {
                 />
               </div>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={6}>
                   <Field
                     as={TextField}
                     name="batchYear"
@@ -136,76 +116,59 @@ function RegistrationForm() {
                     className="text-red-500"
                   />
                 </Grid>
-                <Grid item xs={12} sm={4}>
+                <Grid item xs={12} sm={6}>
                   <FormControl fullWidth variant="outlined">
-                    <InputLabel id="semister-label">Semister</InputLabel>
+                    <InputLabel id="batchSemester-label">Batch Semester</InputLabel>
                     <Field
                       as={Select}
-                      name="semister"
-                      labelId="semister-label"
-                      label="Semister"
-                      onChange={(e) => setFieldValue("semister", e.target.value)}
+                      name="batchSemester"
+                      labelId="batchSemester-label"
+                      label="Batch Semester"
+                      onChange={(e) => setFieldValue("batchSemester", e.target.value)}
                     >
-                      <MenuItem value="March">March</MenuItem>
-                      <MenuItem value="September">September</MenuItem>
+                      <MenuItem value="MARCH">March</MenuItem>
+                      <MenuItem value="SEPTEMBER">September</MenuItem>
                     </Field>
                     <ErrorMessage
-                      name="semister"
+                      name="batchSemester"
                       component="div"
                       className="text-red-500"
                     />
                   </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Field
-                    as={TextField}
-                    name="course"
-                    placeholder="Course"
-                    variant="outlined"
-                    fullWidth
-                  />
-                  <ErrorMessage
-                    name="course"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </Grid>
               </Grid>
-              <div>
-                <RadioGroup row name="gender" aria-label="gender">
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                </RadioGroup>
-                <ErrorMessage
-                  name="gender"
-                  component="div"
-                  className="text-red-500"
-                />
-              </div>
-              <div>
+              <FormControl fullWidth variant="outlined" sx={{ marginTop: "1rem" }}>
+                <InputLabel id="course-label">Course</InputLabel>
                 <Field
-                  as={TextField}
-                  name="prn"
-                  placeholder="PRN"
-                  type="text"
-                  variant="outlined"
-                  fullWidth
-                />
+                  as={Select}
+                  name="course"
+                  labelId="course-label"
+                  label="Course"
+                  onChange={(e) => setFieldValue("course", e.target.value)}
+                >
+                  <MenuItem value="DAC">DAC</MenuItem>
+                  <MenuItem value="DASSD">DASSD</MenuItem>
+                  <MenuItem value="DMC">DMC</MenuItem>
+                  <MenuItem value="DVLSI">DVLSI</MenuItem>
+                  <MenuItem value="DESD">DESD</MenuItem>
+                  <MenuItem value="DIOT">DIOT</MenuItem>
+                  <MenuItem value="DRAT">DRAT</MenuItem>
+                  <MenuItem value="DUASP">DUASP</MenuItem>
+                  <MenuItem value="DAI">DAI</MenuItem>
+                  <MenuItem value="DBDA">DBDA</MenuItem>
+                  <MenuItem value="DHPCAP">DHPCAP</MenuItem>
+                  <MenuItem value="DHPCSA">DHPCSA</MenuItem>
+                  <MenuItem value="DITISS">DITISS</MenuItem>
+                  <MenuItem value="DCSF">DCSF</MenuItem>
+                  <MenuItem value="DFBD">DFBD</MenuItem>
+                </Field>
                 <ErrorMessage
-                  name="prn"
+                  name="course"
                   component="div"
                   className="text-red-500"
                 />
-              </div>
-</div>
+              </FormControl>
+            </div>
             <Button
               sx={{ padding: ".8rem 0rem" }}
               fullWidth
@@ -220,7 +183,7 @@ function RegistrationForm() {
       </Formik>
 
       <div className="flex items-center space-x-1 mt-5 justify-center">
-        <p>if you have already account ?</p>
+        <p>If you already have an account?</p>
         <Button onClick={() => navigate("/login")} size="small">
           Login
         </Button>

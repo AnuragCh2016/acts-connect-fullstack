@@ -6,24 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { findUserById } from "../../Redux/Auth/auth.action";
 import { useParams } from "react-router-dom";
 import { getUsersPost } from "../../Redux/Post/post.action";
-import UsersReelCard from "../Reels/UsersReelCard";
-import { getUsersReels } from "../../Redux/Reels/reels.acton";
-
 
 const tabs = [
   { value: "post", name: "Post" },
-  { value: "reels", name: "Reels" },
   { value: "saved", name: "Saved" },
   { value: "repost", name: "Repost" },
 ];
 
 const Profile = () => {
   const handleFollowUser = () => console.log("handle follow user");
-  const [value, setValue] = React.useState("post");
+  const [value, setValue] = useState("post");
   const [openModel, setOpenModal] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { auth , post,reel} = useSelector((store) => store);
+  const { auth, post } = useSelector((store) => store);
 
   const handleCloseProfileModal = () => setOpenModal(false);
   const handleOpenProfileModal = () => setOpenModal(true);
@@ -31,11 +27,12 @@ const Profile = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   useEffect(() => {
     dispatch(findUserById(id));
-    dispatch(getUsersPost(id))
-    dispatch(getUsersReels(id))
-  }, [id]);
+    dispatch(getUsersPost(id));
+  }, [id, dispatch]);
+
   return (
     <div className="py-10  w-[70%] ">
       <div className="rounded-md  bg-[#191c29]">
@@ -51,10 +48,15 @@ const Profile = () => {
             alt="Avatar"
             src={auth.findUser?.image}
             className="transform -translate-y-24 "
-            sx={{ width: "10rem", height: "10rem", bgcolor:"#212534",color:"rgb(88,199,250)" }}
+            sx={{
+              width: "10rem",
+              height: "10rem",
+              bgcolor: "#212534",
+              color: "rgb(88,199,250)",
+            }}
             color="primary"
           />
-          {auth.user?.id===auth.findUser?.id ? (
+          {auth.user?.id === auth.findUser?.id ? (
             <Button
               onClick={handleOpenProfileModal}
               sx={{ borderRadius: "20px" }}
@@ -76,7 +78,9 @@ const Profile = () => {
         </div>
         <div className="p-5">
           <div>
-            <h1 className="py-1 font-bold text-xl">{auth.findUser?.firstName+" "+auth.findUser?.lastName}</h1>
+            <h1 className="py-1 font-bold text-xl">
+              {auth.findUser?.firstName + " " + auth.findUser?.lastName}
+            </h1>
             <p>
               @
               {auth.findUser?.firstName?.toLowerCase() +
@@ -101,7 +105,7 @@ const Profile = () => {
               aria-label="wrapped label tabs example"
             >
               {tabs.map((item) => (
-                <Tab value={item.value} label={item.name} wrapped />
+                <Tab key={item.value} value={item.value} label={item.name} wrapped />
               ))}
             </Tabs>
           </Box>
@@ -109,22 +113,19 @@ const Profile = () => {
             {value === "post" ? (
               <div className="space-y-5 w-[70%] my-10">
                 {post.posts.map((item) => (
-                  <div className="border border-[#3b4054] rounded-md">
-                    <PostCard item={item}/>{" "}
+                  <div key={item.id} className="border border-[#3b4054] rounded-md">
+                    <PostCard item={item} />
                   </div>
                 ))}
               </div>
             ) : value === "repost" ? (
               <div>Repost</div>
-            ) : value === "reels" ? (
-              <div className="flex flex-wrap py-5">
-                
-                 {reel.reels.map((reel) => (
-                  <UsersReelCard reel={reel} />
+            ) : (
+              <div>
+                {auth.findUser?.savedPosts.map((item) => (
+                  <PostCard key={item.id} item={item} />
                 ))}
               </div>
-            ) : (
-              <div>{auth.findUser?.savedPosts.map((item)=><PostCard item={item}/>)}</div>
             )}
           </div>
         </section>

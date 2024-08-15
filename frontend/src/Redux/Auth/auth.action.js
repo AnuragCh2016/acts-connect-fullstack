@@ -75,7 +75,7 @@ export const loginUser = (loginData) => async (dispatch) => {
 export const registerUser = (userData) => async (dispatch) => {
   dispatch({type:REGISTER_REQUEST});
   try {
-    const response = await axios.post(`${API_BASE_URL}/auth/signup`, userData);
+    const response = await axios.post(`${API_BASE_URL}/auth/register`, userData);
     const user = response.data;
     console.log("created user - : ", user);
     if (user.jwt) {

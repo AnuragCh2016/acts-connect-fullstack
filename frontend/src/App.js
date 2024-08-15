@@ -4,7 +4,6 @@ import Routers from './Routes/Routers';
 import HomePage from './pages/HomePage/HomePage';
 import { Route, Routes } from 'react-router-dom';
 import Message from './pages/Message/Message';
-import Reels from './pages/Reels/Reels';
 import Authentication from './pages/Authentication/Authentication';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
