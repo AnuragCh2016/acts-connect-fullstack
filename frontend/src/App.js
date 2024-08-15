@@ -14,7 +14,7 @@ import VideoCall from './components/Message/VideoCall';
 import Demo from './pages/Message/Demo';
 import VideoCalling from './components/Message/VideoCalling';
 import AccommodationPage from './pages/Accomodation/AccommodationPage';
-import darkTheme from './theam/DarkTheam';
+import darkTheme from './theam/darkTheme';
 import { ThemeProvider } from '@mui/material';
 import MeetTheTeam from './pages/MeetTheTeam/MeetTheTeam';
 import ViewJobPosting from './pages/Jobs/AddJobPosting';
