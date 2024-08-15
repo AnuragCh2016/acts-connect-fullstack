@@ -22,12 +22,12 @@ export const navigationMenu=[
     {
         title: "Job",
         icon: <WorkIcon />, 
-        path:"/reels"
+        path:"/view-job"
     },
     {
         title:"Add Job" ,
         icon:<ControlPointIcon/>,
-        path:"/create-reels"
+        path:"/add-job"
         
     },
     {

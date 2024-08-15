@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobPostings } from "../../Redux/Jobs/jobs.actions";
+import { getJobPostings } from "./jobs.actions";
 import { Button, Card, CardContent, Typography, CircularProgress, Backdrop } from "@mui/material";
 
 const ViewJobPostings = () => {

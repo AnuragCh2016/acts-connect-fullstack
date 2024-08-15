@@ -17,7 +17,9 @@ import AccommodationPage from './pages/Accomodation/AccommodationPage';
 import darkTheme from './theam/DarkTheam';
 import { ThemeProvider } from '@mui/material';
 import MeetTheTeam from './pages/MeetTheTeam/MeetTheTeam';
-
+import ViewJobPosting from './pages/Jobs/AddJobPosting';
+import { Pages } from '@mui/icons-material';
+import AddJobPosting from './pages/Jobs/ViewJobPostings';
 function App() {
   const dispatch=useDispatch();
   const {auth}=useSelector(store=>store)
@@ -40,6 +42,8 @@ function App() {
         <Route path='/demo' element={<Demo/>}/>
         <Route path='/video-calling' element={<VideoCalling/>}/>
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
+        <Route path="/view-job" element={<ViewJobPosting />} />
+        <Route path="/add-job" element={<AddJobPosting />} />
       </Routes>
      
     </ThemeProvider>
