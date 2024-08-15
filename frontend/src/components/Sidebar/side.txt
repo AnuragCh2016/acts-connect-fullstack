@@ -1,0 +1,152 @@
+import HomeIcon from '@mui/icons-material/Home';
+import ExploreIcon from '@mui/icons-material/Explore';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MessageIcon from '@mui/icons-material/Message';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import GroupIcon from '@mui/icons-material/Group';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PendingIcon from '@mui/icons-material/Pending';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+
+export const navigationMenu=[
+    {
+        title:"Home",
+        icon:<HomeIcon/>,
+        path:"/"
+    },
+    {
+        title: "Job",
+        icon:<ExploreIcon/>,
+        path:"/reels"
+    },
+    {
+        title:"Add Job" ,
+        icon:<ControlPointIcon/>,
+        path:"/create-reels"
+        
+    },
+    {
+        title: "Notifications",
+        icon:<NotificationsIcon/>,
+        path:"/notifications"
+    },
+    {
+        title:"Messages" ,
+        icon:<MessageIcon/>,
+        path:"/messages"
+    },
+    {
+        title:"Lists" ,
+        icon:<ListAltIcon/>,
+        path:"/lists"
+    },
+    {
+        title:"Communities" ,
+        icon:<GroupIcon/>,
+        path:"/communities"
+    },
+    
+    {
+        title:"Profile" ,
+        icon:<AccountCircleIcon/>,
+        path:"/profile"
+        
+    },
+   
+]
+
+________________________________________________________________________________
+
+import React from "react";
+import { Avatar, Button, Divider, Menu, MenuItem } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { useNavigate } from "react-router-dom";
+import { navigationMenu } from "./NavigationMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Redux/Auth/auth.action";
+import "./SideBar.css"
+
+const Sidebar = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openLogoutMenu = Boolean(anchorEl);
+  const { auth } = useSelector((store) => store);
+
+  const navigate = useNavigate();
+  const dispatch=useDispatch();
+
+  const handleOpenLogoutMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout())
+    handleClose();
+    navigate("/")
+  };
+  return (
+    <div className="card text-white  h-screen flex flex-col justify-between py-5 bg-[rgb(3,11,40)]">
+      <div className="space-y-8 pl-5">
+        <div className="">
+          <span className="logo">ActsConnects</span>
+        </div>
+        <div className="space-y-8">
+          {navigationMenu.map((item) => (
+            <div
+              onClick={() =>
+                item.title === "Profile"
+                  ? navigate(`/profile/${auth.user.id}`)
+                  : navigate(`${item.path}`)
+              }
+              className="cursor-pointer flex space-x-3 items-center"
+            >
+              {item.icon}
+              <p className="text-xl">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <Divider />
+        <div className="pl-5 flex items-center  justify-between pt-5">
+          <div className="flex items-center space-x-3">
+            <Avatar
+              alt="Remy Sharp"
+              src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_960_720.png"
+            />
+
+            <div>
+              <p className="font-bold">{auth.user?.firstName +" "+ auth.user?.lastName}</p>
+              <p className="opacity-70">{auth.user?.firstName}</p>
+            </div>
+          </div>
+          <Button
+            id="basic-button"
+            aria-controls={openLogoutMenu ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={openLogoutMenu ? "true" : undefined}
+            onClick={handleOpenLogoutMenu}
+          >
+            <MoreHorizIcon />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={openLogoutMenu}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;
