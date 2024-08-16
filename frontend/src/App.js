@@ -3,7 +3,7 @@ import './App.css';
 import Routers from './Routes/Routers';
 import HomePage from './pages/HomePage/HomePage';
 import { Route, Routes } from 'react-router-dom';
-import Message from './pages/Message/Message';
+import MessagePage from './pages/Message/MessagePage';
 import Authentication from './pages/Authentication/Authentication';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -35,7 +35,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Routes>
         <Route path='/*' element={auth.user? <HomePage/>:<Authentication/>}/>
-        <Route path="/messages" element={<Message/>} />
+        <Route path="/messages" element={<MessagePage/>} />
         <Route path="/accommodation" element={<AccommodationPage />} />
         <Route path="/password-change-success" element={<PasswordChangeSuccess/>} />
         <Route path='/video-call' element={<VideoCall/>}/>

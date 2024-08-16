@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Tab, Tabs } from "@mui/material";
+import { Avatar, Box, Button, Tab, Tabs } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PostCard from "../../components/Users Post/PostCard";
 import ProfileModel from "./ProfileModel";
@@ -88,11 +88,7 @@ const Profile = () => {
                 auth.findUser?.lastName?.toLowerCase()}
             </p>
           </div>
-          <div className="flex space-x-5 items-center py-3">
-            <span>41 posts</span>
-            <span>71 followers</span>
-            <span>22 following</span>
-          </div>
+          
           <div className="">
             <p>{auth.findUser?.bio} </p>
           </div>

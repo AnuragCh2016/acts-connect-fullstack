@@ -9,7 +9,6 @@ import {
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import AddIcCallIcon from "@mui/icons-material/AddIcCall";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import WestIcon from "@mui/icons-material/West";
 import ChatMessage from "../../components/Message/ChatMessage";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,11 +24,11 @@ import "./Message.css";
 import { searchUser } from "../../Redux/Auth/auth.action";
 import SearchUser from "../../components/SearchUser/SearchUser";
 import SockJS from "sockjs-client";
-import Stomp from 'stompjs';
+import Stomp from "stompjs";
 
 const Message = () => {
   const dispatch = useDispatch();
-  const { chat,auth } = useSelector((store) => store);
+  const { chat, auth } = useSelector((store) => store);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -50,7 +49,7 @@ const Message = () => {
       content: value,
       image: selectedImage,
     };
-    const data={message,sendToServer:sendMessageToServer}
+    const data = { message, sendToServer: sendMessageToServer };
     dispatch(createMessage(data));
     setSelectedImage(null);
   };
@@ -66,38 +65,27 @@ const Message = () => {
     dispatch(createChat({ userId }));
   };
 
-// ------------------------------------------------- //
 
-const [stompClient, setStompClient] = useState(null);
-// const [messages, setMessages] = useState([]);
-const [inputMessage, setInputMessage] = useState('');
+  const [stompClient, setStompClient] = useState(null);
+  const [inputMessage, setInputMessage] = useState("");
 
-const onConnect=(frem)=>{
-console.log("connect frem : ",frem)
-}
-const onErr=(err)=>{
-  console.log("error when connect ",err)
-}
+  const onConnect = (frem) => {
+    console.log("connect frem : ", frem);
+  };
+  const onErr = (err) => {
+    console.log("error when connect ", err);
+  };
+
   useEffect(() => {
-   
-      const sock = new SockJS("http://localhost:5454/ws");
-      const stomp = Stomp.over(sock);
-      setStompClient(stomp);
-     
-      stomp.connect({}, onConnect, onErr);
-   
+    const sock = new SockJS("http://localhost:5454/ws");
+    const stomp = Stomp.over(sock);
+    setStompClient(stomp);
 
-    // return () => {
-    //   if (stomp) {
-    //     stomp.disconnect();
-    //   }
-    // };
-  },[]);
+    stomp.connect({}, onConnect, onErr);
+  }, []);
 
   useEffect(() => {
     if (stompClient && auth.reqUser && currentChat) {
-      
-
       const subscription = stompClient.subscribe(
         `/user/${currentChat?.id}/private`,
         onMessageRecive
@@ -106,7 +94,6 @@ const onErr=(err)=>{
       return () => {
         subscription.unsubscribe();
       };
-      
     }
   });
 
@@ -122,16 +109,18 @@ const onErr=(err)=>{
 
   const sendMessageToServer = (message) => {
     if (stompClient && message) {
-      // const messageToSend = { content: inputMessage }; // Customize this according to your message structure
-      stompClient.send(`/app/chat/${currentChat?.id.toString()}`, {}, JSON.stringify(message));
-      
+      stompClient.send(
+        `/app/chat/${currentChat?.id.toString()}`,
+        {},
+        JSON.stringify(message)
+      );
     }
   };
 
   useEffect(() => {
-    // Scroll to the bottom when 'messages' change or component mounts
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -141,11 +130,6 @@ const onErr=(err)=>{
         <Grid className="px-5 bg-[#191c29] " xs={3} item>
           <div className="flex h-full justify-between space-x-2">
             <div className="w-full">
-              <div className="flex space-x-4 items-center py-5 ">
-                <WestIcon />
-                <h1 className=" text-xl font-bold">Home</h1>{" "}
-              </div>
-
               <div className="h-[83vh]">
                 <div className="">
                   <SearchUser handleClick={handleCreateChat} />
@@ -185,7 +169,10 @@ const onErr=(err)=>{
                   </IconButton>
                 </div>
               </div>
-              <div ref={chatContainerRef} className="hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5 pb-10">
+              <div
+                ref={chatContainerRef}
+                className="hideScrollbar overflow-y-scroll h-[82vh] px-2 space-y-5 py-5 pb-10"
+              >
                 {messages.map((item, i) => (
                   <ChatMessage key={item.id} item={item} />
                 ))}
@@ -214,7 +201,7 @@ const onErr=(err)=>{
                     type="text"
                     placeholder="Type message..."
                     value={inputMessage}
-                    onChange={(e)=>setInputMessage(e.target.value)}
+                    onChange={(e) => setInputMessage(e.target.value)}
                   />
                   <div>
                     <input

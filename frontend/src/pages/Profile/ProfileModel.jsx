@@ -196,7 +196,7 @@ const ProfileModel = ({ handleClose, open }) => {
               </div>
               <div className="my-3">
                 <p className="text-lg">Birth date · Edit</p>
-                <p className="text-2xl"> October 26, 1999</p>
+                <p className="text-2xl"> July 10, 2001</p>
               </div>
               <p className="py-3 text-lg">Edit Professional Profile</p>
             </div>

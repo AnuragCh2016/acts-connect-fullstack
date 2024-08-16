@@ -43,7 +43,6 @@ export default function CreatePostModal({ handleClose, open }) {
       console.log("Form values:", values);
       handleClose();
 
-      // Reset the form fields after submission
       formik.resetForm();
       setSelectedImage(null);
       setSelectedVideo(null);
