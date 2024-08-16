@@ -22,12 +22,12 @@ export const navigationMenu=[
     {
         title: "Job",
         icon: <WorkIcon />, 
-        path:"/view-job"
+        path:"/add-job"
     },
     {
         title:"Add Job" ,
         icon:<ControlPointIcon/>,
-        path:"/add-job"
+        path:"/view-job"
         
     },
     {
@@ -41,9 +41,9 @@ export const navigationMenu=[
         path:"/messages"
     },
     {
-        title:"Mentors/Communities" ,
+        title:"Find People" ,
         icon:<HandshakeIcon/>,
-        path:"/communities"
+        path:"/find-people"
     },
     
     {

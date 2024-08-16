@@ -1,15 +1,9 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Grid } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 
-const AccommodationCard = ({ image, title, address, price }) => {
+const AccommodationCard = ({ title, address, price }) => {
   return (
     <Card>
-      <CardMedia
-        component="img"
-        height="140"
-        image={image}
-        alt={title}
-      />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {title}

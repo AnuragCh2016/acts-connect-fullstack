@@ -1,38 +1,38 @@
 import React from "react";
 import { Grid, Card, Avatar, Typography } from "@mui/material";
 import Sidebar from "../../components/Sidebar/Sidebar";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 
 const teamMembers = [
   {
     name: "Anurag",
     role: "Founder",
-    image: "path_to_image_1",
+    image: "/1 (4).jpeg",
   },
   {
     name: "Kaustab",
     role: "Founder",
-    image: "path_to_image_2",
+    image: "1 (3).jpeg",
   },
   {
     name: "Aditya",
     role: "Founder",
-    image: "path_to_image_3",
+    image: "1 (5).jpeg",
   },
   {
     name: "Shreyash",
     role: "Founder",
-    image: "path_to_image_4",
+    image: "1 (6).jpeg",
   },
   {
     name: "Lokesh",
     role: "Founder",
-    image: "path_to_image_5",
+    image: "1 (2).jpeg",
   },
   {
     name: "Abhishek",
     role: "Founder",
-    image: "path_to_image_6",
+    image: "1 (1).jpeg",
   },
 ];
 
@@ -50,18 +50,29 @@ const MeetTheTeam = () => {
             <Typography variant="h4" className="text-center mb-10">
               Meet The Team
             </Typography>
+            <br></br>
+            <br></br>
             <Grid container spacing={4}>
               {teamMembers.map((member, index) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+                <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
                   <Link
                     to={`/profile/${member.name.toLowerCase()}`}
                     style={{ textDecoration: "none" }}
                   >
-                    <Card className="p-5 flex flex-col items-center">
+                    <Card
+                      sx={{
+                        p: 5,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        width: 250,
+                        height: 250,
+                      }}
+                    >
                       <Avatar
                         src={member.image}
                         alt={member.name}
-                        sx={{ width: 100, height: 100, mb: 2 }}
+                        sx={{ width: 120, height: 120, mb: 2 }}
                       />
                       <Typography variant="h6">{member.name}</Typography>
                       <Typography variant="body2" color="textSecondary">

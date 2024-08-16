@@ -19,6 +19,7 @@ import MeetTheTeam from './pages/MeetTheTeam/MeetTheTeam';
 import ViewJobPosting from './pages/Jobs/AddJobPosting';
 import { Pages } from '@mui/icons-material';
 import AddJobPosting from './pages/Jobs/ViewJobPostings';
+import FindPeoplePage from './pages/FindPeople/FindPeoplePage';
 function App() {
   const dispatch=useDispatch();
   const {auth}=useSelector(store=>store)
@@ -43,6 +44,7 @@ function App() {
         <Route path="/meet-the-team" element={<MeetTheTeam />} />
         <Route path="/view-job" element={<ViewJobPosting />} />
         <Route path="/add-job" element={<AddJobPosting />} />
+        <Route path="/find-people" element={<FindPeoplePage />} />
       </Routes>
      
     </ThemeProvider>
