@@ -66,13 +66,13 @@ Before starting, ensure you have the following installed:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/AbhishekPandey10/actsconnect_fullstack.git
+    git clone https://github.com/AnuragCh2016/acts-connect-fullstack.git
     ```
 
 2. Navigate to the frontend directory:
 
     ```bash
-    cd actsconnect/actsconnect_frontend
+    cd frontend
     ```
 
 3. Install dependencies:
@@ -92,7 +92,7 @@ Before starting, ensure you have the following installed:
 1. Navigate to the backend directory:
 
     ```bash
-    cd actsconnect/actsconnect_backend
+    cd backend
     ```
 
 2. Install dependencies:
@@ -111,10 +111,9 @@ Before starting, ensure you have the following installed:
 
 ## Usage
 
-- **Frontend Application:** Access it at [http://localhost:3000](http://localhost:3000).
-- **Backend API:** Available at [http://localhost:8080](http://localhost:8080).
+- **Frontend Application:** Our frontend was accessed it at [http://localhost:3000](http://localhost:3000).
+- **Backend API:** Our backend was available at [http://localhost:8080](http://localhost:8080).
 - **Database:** MySQL database is used for this application. You can use any other database as well
-- **Change this at the end**
 
 ## Folder Structure
 
